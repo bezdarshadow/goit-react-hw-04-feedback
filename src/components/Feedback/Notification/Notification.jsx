@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import styles from './notification.module.css'
 
@@ -7,7 +8,7 @@ const Notification = ({message}) => {
     );
 }
 
-export default Notification;
+export default memo(Notification);
 
 Notification.propTypes = {
     message: PropTypes.string.isRequired,
