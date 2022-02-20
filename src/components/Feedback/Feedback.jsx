@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
@@ -22,36 +22,36 @@ const Feedback = () => {
     });
   };
 
-  const countTotalFeedback = () => {
+  const countTotalFeedback = useMemo(() => {
     const total = Object.values(feedback).reduce(
       (total, value) => (value ? total + value : total),
       0
     );
 
     return total;
-  };
+  }, [feedback]);
 
-  const countPositiveFeedbackPercentage = () => {
-    if (countTotalFeedback()) {
+  const countPositiveFeedbackPercentage = useMemo(() => {
+    if (countTotalFeedback) {
       const percentage = Number.parseFloat(
-        ((feedback.good / countTotalFeedback()) * 100).toFixed(1)
+        ((feedback.good / countTotalFeedback) * 100).toFixed(1)
       );
       return percentage;
     }
     return 0;
-  };
+  }, [countTotalFeedback, feedback.good]);
 
   return (
     <>
       <FeedbackOptions options={feedback} onLeaveFeedback={addAttribute} />
 
-      {countTotalFeedback() ? (
+      {countTotalFeedback ? (
         <Statistics
           good={feedback.good}
           neutral={feedback.neutral}
           bad={feedback.bad}
-          total={countTotalFeedback()}
-          positivePercentage={countPositiveFeedbackPercentage()}
+          total={countTotalFeedback}
+          positivePercentage={countPositiveFeedbackPercentage}
         />
       ) : (
         <Notification message="There is no feedback" />
