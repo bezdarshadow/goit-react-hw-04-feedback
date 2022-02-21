@@ -32,9 +32,9 @@ const Feedback = () => {
   };
 
   const countPositiveFeedbackPercentage = () => {
-    if (countTotalFeedback) {
+    if (countTotalFeedback()) {
       const percentage = Number.parseFloat(
-        ((feedback.good / countTotalFeedback) * 100).toFixed(1)
+        ((feedback.good / countTotalFeedback()) * 100).toFixed(1)
       );
       return percentage;
     }
@@ -49,8 +49,8 @@ const Feedback = () => {
           good={feedback.good}
           neutral={feedback.neutral}
           bad={feedback.bad}
-          total={countTotalFeedback}
-          positivePercentage={countPositiveFeedbackPercentage}
+          total={countTotalFeedback()}
+          positivePercentage={countPositiveFeedbackPercentage()}
         />
       ) : (
         <Notification message="There is no feedback" />
