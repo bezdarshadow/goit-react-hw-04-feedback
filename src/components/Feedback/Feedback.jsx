@@ -44,7 +44,7 @@ const Feedback = () => {
     <>
       <FeedbackOptions options={feedback} onLeaveFeedback={addAttribute} />
 
-      {countTotalFeedback ? (
+      {countTotalFeedback() ? (
         <Statistics
           good={feedback.good}
           neutral={feedback.neutral}
