@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
@@ -12,7 +12,7 @@ const initialState = {
 
 const Feedback = () => {
   const [feedback, setFeedback] = useState(initialState);
-  const addAttribute = property => {
+  const addAttribute = useCallback(property => {
     setFeedback(state => {
       const newFeedback = state[property];
       return {
@@ -20,7 +20,7 @@ const Feedback = () => {
         [property]: newFeedback + 1,
       };
     });
-  };
+  }, []);
 
   const countTotalFeedback = () => {
     const total = Object.values(feedback).reduce(

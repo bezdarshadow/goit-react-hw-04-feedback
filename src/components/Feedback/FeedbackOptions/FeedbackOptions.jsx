@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import styles from './feedback-options.module.css'
 import PropTypes from 'prop-types'
 
@@ -15,7 +17,7 @@ const FeedbackOptions = ({options, onLeaveFeedback}) => {
     )
 }
 
-export default FeedbackOptions;
+export default memo(FeedbackOptions);
 
 FeedbackOptions.propTypes = {
   options: PropTypes.shape({
